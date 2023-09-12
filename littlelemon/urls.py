@@ -16,8 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+#router.register(r'tables', BookingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurant/', include('restaurant.urls')),
+    path('api/', include('restaurant.urls')),
+    path('restaurant/menu/',include('restaurant.urls')),
+    path('restaurant/booking/', include(router.urls)),
 ]
+
+#Correct. You defined a view of this type in your exercise.
+#  You require a single class inheriting the ViewSet class that can handle GET, POST, PUT and DELETE requests. 
+
+
+#Inside the project-level urls.py file, call the router.register() function to register the ViewSets,
+#  and add the router.urls in the project's urlpatterns list. The app/urls.py file isn't needed for this. 
