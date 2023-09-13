@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Booking, Menu
 from .serializers import bookingSerializer, menuSerializer
@@ -51,7 +52,7 @@ class menuview(APIView):
 class BookingViewSet(viewsets.ModelViewSet):
     items = Booking.objects.all()
     serializer_class = bookingSerializer
-    #permission_classes = [permissions.IsAuthenticated] 
+    permission_classes = [IsAuthenticated] 
 
 
     
