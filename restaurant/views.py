@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 from .models import Booking, Menu
 from .serializers import bookingSerializer, menuSerializer
@@ -47,7 +48,9 @@ class menuview(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return Response({"status":"success", "data": serializer})
+            #return Response({"status":"success", "data": serializer})
+            return Response(serializer.data, status.HTTP_201_CREATED)
+
 
 class BookingViewSet(viewsets.ModelViewSet):
     items = Booking.objects.all()
