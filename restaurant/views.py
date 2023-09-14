@@ -33,7 +33,7 @@ class bookingview(APIView):
 
         if serializer.is_valid():
             serializer.save()
-            return Response({"status":"success", "data": serializer})
+            return Response(serializer.data, status.HTTP_201_CREATED)
 
 
 class menuview(APIView):
